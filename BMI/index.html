@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Index Caculation</title>
+  <meta charset="utf-8">
+  <meta name="description" content="BMI Index Caculation">
+  <meta name="author" content="KS">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>BMI Index Caculation</h1>
+    <h2>and Implementation in Shiny</h2>
+    <p>KS<br/>Data Sci</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>The BMI Index and Formula</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>The BMI stands for body mass index.</li>
+<li>It is a measure of relative weight based on an individual&#39;s mass and height.</li>
+<li>Its mathematical formula is: \[\frac{Weight}{Height^2}\times{703}\]</li>
+<li>If your BMI &lt;= 18.5, you are underweight; if your BMI &gt;= 25, you are overweight; if your BMI is in between, you are normal. </li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Example 1</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Let is compute two BMI Cases in R.
+Case 1: weight is 170, height is 72 inches</p>
+
+<pre><code class="r">weight &lt;-170
+height &lt;- 72
+BMI &lt;- 703*weight/(height^2)
+print(sprintf(&quot;Your BMI is: %.2f&quot;, BMI))
+</code></pre>
+
+<pre><code>## [1] &quot;Your BMI is: 23.05&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Example 2</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Case 2: weight is 270, height is 72 inches</p>
+
+<pre><code class="r">weight &lt;-270
+height &lt;- 72
+BMI &lt;- 703*weight/(height^2)
+if (BMI &gt; 25) {
+    print(sprintf(&quot;Your BMI is: %.2f&quot;, BMI))
+    print(&quot;You are overweight!&quot;)
+
+}
+</code></pre>
+
+<pre><code>## [1] &quot;Your BMI is: 36.61&quot;
+## [1] &quot;You are overweight!&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Implemented in Shiny</h2>
+  </hgroup>
+  <article data-timings="">
+     
+<div class='row-fluid'>
+  <div class='span5'>
+    <form id="knitForm4" data-cell="4">
+      <p>The following is the actual interactive application in shiny.</p>
+
+<div class="row-fluid">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <h3>BMI Caculator</h3>
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <form class="well">
+          <label for="Weight">Weight in lbs</label>
+          <input id="Weight" type="number" value="150" min="20" max="500" step="5"/>
+          <label for="Height">Height in inch</label>
+          <input id="Height" type="number" value="70" min="5" max="100" step="1"/>
+          <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="span8">
+        <h2>                   </h2>
+        <h2>                   </h2>
+        <h3>Results of Your BMI</h3>
+        <h5>Your Weight entered in Pounds:</h5>
+        <pre id="WeightValue" class="shiny-text-output"></pre>
+        <h5>Your Height entered in Inches:</h5>
+        <pre id="HeightValue" class="shiny-text-output"></pre>
+        <h5>Your BMI is:</h5>
+        <pre id="BMI" class="shiny-text-output"></pre>
+        <h5>Your BMI category is:</h5>
+        <pre id="BMI_message" class="shiny-text-output"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+      <div id='aceeditor4' style="height:px;"></div>
+      <div class='interactive btn-toolbar pull-left'>
+        <div class='btn-group'>
+          <a class='btn btn-small action-button' id='runCode4' data-action='runCode'
+            data-cell='4' rel='tooltip' data-title='Run Code'>
+            <i class='icon-play'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='testCode4' data-action='testCode'
+             data-cell='4' rel='tooltip' data-title='Test Code'>
+            <i class='icon-check'></i>
+          </a>
+          <a class='btn btn-small iBtn' id='clearResult4' data-action='clearResult'
+             data-cell='4' rel='tooltip' data-title='Clear Output'>
+            <i class="icon-remove"></i>
+          </a>
+          <a class='btn  btn-small iBtn' id='getHint4' rel='tooltip' 
+            data-title="Get Hint" data-action='getHint'
+            data-cell='4' data-hint="">
+            <i class="icon-bookmark"></i>
+          </a>
+        </div>
+      </div>    </form>
+  </div>
+  <div class='span7'>
+    <div id="knitResult4" class='shiny-html-output'></div>
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='The BMI Index and Formula'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Example 1'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example 2'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Implemented in Shiny'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script src="shared/shiny.js" type="text/javascript"></script>
+  <script src="shared/slider/js/jquery.slider.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="shared/slider/css/jquery.slider.min.css"></link>
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
